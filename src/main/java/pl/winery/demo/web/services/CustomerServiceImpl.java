@@ -9,6 +9,7 @@ import java.util.UUID;
 /**
  * Created by mz 19.07.22
  */
+@Slf4j
 @Service
 public class CustomerServiceImpl implements CustomerService {
     @Override
@@ -18,5 +19,21 @@ public class CustomerServiceImpl implements CustomerService {
                 .lastName("Zietek")
                 .email("marcin@marcin.pl")
                 .build();
+    }
+
+    @Override
+    public CustomerDto saveNewCustomer(CustomerDto customerDto) {
+        return CustomerDto.builder().id(UUID.randomUUID())
+                .build();
+    }
+
+    @Override
+    public void updateCustomer(UUID customerId, CustomerDto customerDto) {
+
+    }
+
+    @Override
+    public void deleteCustomerById(UUID customerId) {
+        log.debug("Deleting a customer...");
     }
 }
