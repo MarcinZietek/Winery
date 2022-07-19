@@ -40,4 +40,10 @@ public class WineController {
         wineService.updateWine(wineId, wineDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
+
+    @DeleteMapping({"/{wineId}"})
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteBeer(@PathVariable("wineId") UUID wineId){
+        wineService.deleteWineById(wineId);
+    }
 }
