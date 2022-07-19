@@ -34,4 +34,10 @@ public class WineController {
         headers.add("Location", "/api/v1/wine" + saveDto.getId().toString());
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
+
+    @PutMapping({"/{wineId}"})
+    public ResponseEntity handleUpdate(@PathVariable("wineId") UUID wineId, @RequestBody WineDto wineDto){
+        wineService.updateWine(wineId, wineDto);
+        return new ResponseEntity(HttpStatus.NO_CONTENT);
+    }
 }

@@ -23,4 +23,9 @@ public class WineServiceImpl implements WineService {
         return wineDto.builder().id(UUID.randomUUID())
                 .build();
     }
+
+    @Override
+    public void updateWine(UUID wineId, WineDto wineDto) {
+
+    }
 }
