@@ -17,4 +17,10 @@ public class WineServiceImpl implements WineService {
                 .wineType("Dry")
                 .build();
     }
+
+    @Override
+    public WineDto saveNewWine(WineDto wineDto) {
+        return wineDto.builder().id(UUID.randomUUID())
+                .build();
+    }
 }
