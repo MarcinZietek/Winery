@@ -7,12 +7,13 @@ import org.springframework.web.bind.annotation.*;
 import pl.winery.demo.web.model.WineDto;
 import pl.winery.demo.web.services.WineService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 /**
  * Created by mz on 19.07.22
  */
-@RequestMapping("api/v1/wine")
+@RequestMapping("api/v1/wine/")
 @RestController
 public class WineController {
 
@@ -28,7 +29,7 @@ public class WineController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody WineDto wineDto){
+    public ResponseEntity handlePost(@Valid @RequestBody WineDto wineDto){
         WineDto saveDto = wineService.saveNewWine(wineDto);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/wine" + saveDto.getId().toString());
@@ -36,7 +37,7 @@ public class WineController {
     }
 
     @PutMapping({"/{wineId}"})
-    public ResponseEntity handleUpdate(@PathVariable("wineId") UUID wineId, @RequestBody WineDto wineDto){
+    public ResponseEntity handleUpdate(@PathVariable("wineId") UUID wineId, @Valid @RequestBody WineDto wineDto){
         wineService.updateWine(wineId, wineDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
