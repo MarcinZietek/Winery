@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import pl.winery.demo.web.model.CustomerDto;
 import pl.winery.demo.web.services.CustomerService;
 
+import javax.validation.Valid;
 import java.util.UUID;
 
 /**
@@ -28,7 +29,7 @@ public class CustomerController {
     }
 
     @PostMapping
-    public ResponseEntity handlePost(@RequestBody CustomerDto customerDto){
+    public ResponseEntity handlePost(@Valid @RequestBody CustomerDto customerDto){
         CustomerDto saveDto = customerService.saveNewCustomer(customerDto);
         HttpHeaders headers = new HttpHeaders();
         headers.add("Location", "/api/v1/customer" + saveDto.getId().toString());
@@ -36,7 +37,7 @@ public class CustomerController {
     }
 
     @PutMapping({"/{customerId}"})
-    public ResponseEntity handleUpdate(@PathVariable("customerId") UUID customerId, @RequestBody CustomerDto customerDto){
+    public ResponseEntity handleUpdate(@PathVariable("customerId") UUID customerId, @Valid @RequestBody CustomerDto customerDto){
         customerService.updateCustomer(customerId, customerDto);
         return new ResponseEntity(HttpStatus.NO_CONTENT);
     }
